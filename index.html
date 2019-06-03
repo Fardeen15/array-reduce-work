@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li data-time="2:45">vedio 1</li>
+        <li data-time="4:56">vedio 2</li>
+        <li data-time="34:35">vedio 3</li>
+        <li data-time="3:44">vedio 4</li>
+        <li data-time="7:42">vedio 5</li>
+        <li data-time="5:45">vedio 6</li>
+        <li data-time="8:39">vedio 7</li>
+        <li data-time="2:47">vedio 8</li>
+        <li data-time="4:35">vedio 9</li>
+        <li data-time="2:45">vedio 10</li>
+        <li data-time="7:65">vedio 11</li>
+        <li data-time="9:40">vedio 12</li>
+    </ul>
+
+    <script>
+        const timeNode = Array.from(document.querySelectorAll("[data-time]"));
+        console.log(timeNode);
+        const seconds = timeNode.map(node => node.dataset.time).map(timecode => {
+            const [mins, sec] = timecode.split(':').map(parseFloat);
+            return (mins * 60) + sec
+        }).reduce((total, vinsec) => total + vinsec);
+
+        let secondLeft = seconds;
+        const hour = Math.floor(secondLeft / 3600);
+        secondLeft = secondLeft % 3600;
+
+        const min = Math.floor(secondLeft / 60);
+        secondLeft = secondLeft % 60;
+
+        console.log(`${hour}:${min}:${secondLeft}`);
+    </script>
+</body>
+
+</html>
